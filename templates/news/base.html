@@ -94,7 +94,7 @@
             <ul class="tag_nav">
 
               {% for category in category_list %}
-                    <li><a href="{% url 'category_deatail_page' %}">{{category.name}}</a></li>
+                    <li><a href="{% url 'category_detail_page' category.pk %}">{{category.name}}</a></li>
               {% endfor %}
 
             </ul>

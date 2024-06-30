@@ -16,7 +16,7 @@
           <li class="active"><a href="../index.html"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
           
           {% for category in category_list %}
-            <li><a href="{% url 'category_deatail_page' %}">{{category.name}}</a></li>
+            <li><a href="{% url 'category_detail_page' category.pk%}">{{category.name}}</a></li>
           {% endfor %}
 
         </ul>
@@ -79,7 +79,7 @@
                 <ul>
                   
                   {% for category in category_list %}
-                    <li class="cat-item"><a href="{% url 'category_deatail_page' %}">{{category.name}}</a></li>
+                    <li class="cat-item"><a href="{% url 'category_detail_page' category.pk %}">{{category.name}}</a></li>
                   {% endfor %}
                   
                 </ul>

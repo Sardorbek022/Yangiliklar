@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 
 from .models import (
@@ -35,11 +35,29 @@ class ContactPageView(View):
     
 class NewsDetailPage(View):
     
-    def get(self, request):
-        return render(request=request, template_name='news/news_detail.html')
+    def get(self, request, pk):
+        
+        # news_detail = NewsModel.objects.get(pk=pk)
+        news_detail = get_object_or_404(NewsModel, pk=pk)
+        
+        
+        context = {
+            'news_detail' : news_detail
+        }
+        
+        return render(request=request, template_name='news/news_detail.html', context=context)
     
     
 class CategoryDetailPage(View):
     
-    def get(self, request):
-        return render(request=request, template_name='news/category_detail.html')
+    def get(self, request, pk):
+        
+        # category_detail = NewsModel.objects.get(pk=pk)
+        category_detail = get_object_or_404(NewsModel, pk=pk)
+        
+        
+        context = {
+            'category_detail' : category_detail
+        }
+        
+        return render(request=request, template_name='news/category_detail.html', context=context)
