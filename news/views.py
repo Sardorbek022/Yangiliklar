@@ -1,8 +1,12 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 
 from .models import (
     NewsModel, ContactModel, CategoryModel
+)
+
+from .forms import (
+    ContactForm, 
 )
 
 
@@ -30,7 +34,19 @@ class HomePageView(View):
 class ContactPageView(View):
     
     def get(self, request):
-        return render(request=request, template_name='news/contact.html')
+            return render(request=request, template_name='news/contact.html')
+    
+    
+    def post(self, request):
+        
+        form = ContactForm(request.POST)
+    
+        if form.is_valid():
+            form.save()
+            return redirect('home_page')
+            
+        return render(request=request, template_name='news/contact.html', context={'form':form})
+        
     
     
 class NewsDetailPage(View):
