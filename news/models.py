@@ -5,9 +5,13 @@ from django.db import models
 
 class CategoryModel(models.Model):
     name = models.CharField(max_length=50, verbose_name='Kategoriya nomi')
+    slug = models.SlugField(max_length=300)
     
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        return reverse("category_detail_page", args=[self.slug])
 
     class Meta:
         db_table = 'Categorys'
@@ -47,6 +51,12 @@ class NewsModel(models.Model):
     objects = models.Manager()
     manager = ActivedManager()
     
+    def __str__(self):
+        return self.title
+    
+    def get_absolute_url(self):
+        return reverse("news_detail_page", args=[self.slug])
+    
     class Meta:
         ordering = ['-publish_time']
         db_table = 'News'
@@ -54,10 +64,6 @@ class NewsModel(models.Model):
         verbose_name = 'Yangiliklar'
         verbose_name_plural = 'Yangiliklar'
         
-    
-    def __str__(self):
-        return self.title
-    
     
 class ContactModel(models.Model):
     

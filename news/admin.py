@@ -21,6 +21,7 @@ class CategoryModelAdmin(admin.ModelAdmin):
     search_fields = ['name',]
     list_display = ['name',]
     list_filter = ['name', ]
+    prepopulated_fields = {'slug':('name',)}
     
 
 @admin.register(ContactModel)

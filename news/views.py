@@ -51,10 +51,12 @@ class ContactPageView(View):
     
 class NewsDetailPage(View):
     
-    def get(self, request, pk):
+    def get(self, request, news):
         
         # news_detail = NewsModel.objects.get(pk=pk)
-        news_detail = get_object_or_404(NewsModel, pk=pk)
+        # news_detail = get_object_or_404(NewsModel, pk=pk)
+        news_detail = get_object_or_404(NewsModel, slug=news, status=NewsModel.Status.Active)
+
         
         
         context = {
@@ -66,10 +68,11 @@ class NewsDetailPage(View):
     
 class CategoryDetailPage(View):
     
-    def get(self, request, pk):
+    def get(self, request, category):
         
         # category_detail = NewsModel.objects.get(pk=pk)
-        category_detail = get_object_or_404(NewsModel, pk=pk)
+        # category_detail = get_object_or_404(NewsModel, pk=pk)
+        category_detail = get_object_or_404(CategoryModel, slug=category)
         
         
         context = {
