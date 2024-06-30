@@ -14,7 +14,11 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav main_nav">
           <li class="active"><a href="{% url 'home_page' %}"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
-          <li><a href="{% url 'category_deatail_page' %}">Category name</a></li>
+          
+          {% for category in category_list %}
+            <li><a href="{% url 'category_deatail_page' %}">{{category.name}}</a></li>
+          {% endfor %}
+
         </ul>
       </div>
     </nav>
@@ -131,13 +135,11 @@
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="category">
                 <ul>
-                  <li class="cat-item"><a href="#">Sports</a></li>
-                  <li class="cat-item"><a href="#">Fashion</a></li>
-                  <li class="cat-item"><a href="#">Business</a></li>
-                  <li class="cat-item"><a href="#">Technology</a></li>
-                  <li class="cat-item"><a href="#">Games</a></li>
-                  <li class="cat-item"><a href="#">Life &amp; Style</a></li>
-                  <li class="cat-item"><a href="#">Photography</a></li>
+                  
+                  {% for category in category_list %}
+                    <li class="cat-item"><a href="{% url 'category_deatail_page' %}">{{category.name}}</a></li>
+                  {% endfor %}
+                  
                 </ul>
               </div>
               <div role="tabpanel" class="tab-pane" id="video">
