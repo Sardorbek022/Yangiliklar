@@ -1,15 +1,21 @@
 from django.shortcuts import render
 from django.views import View
 
-# from .models import (
-#     NewsModel, ContactModel, CategoryModel
-# )
+from .models import (
+    NewsModel, ContactModel, CategoryModel
+)
 
 
 class HomePageView(View):
     
     def get(self,request):
-        return render(request=request, template_name='news/home.html')
+        all_news_list = NewsModel.manager.all().order_by('-publish_time')
+        
+        context = {
+            'all_news_list' : all_news_list
+        }
+
+        return render(request=request, template_name='news/home.html', context=context)
     
     
 class ContactPageView(View):

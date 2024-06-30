@@ -18,7 +18,7 @@ class CategoryModel(models.Model):
         
 class ActivedManager(models.Manager):
     def get_queryset(self):
-        return super().get_queryset().filter(status='Active')
+        return super().get_queryset().filter(status='Faol')
     
     
 class NewsModel(models.Model):
