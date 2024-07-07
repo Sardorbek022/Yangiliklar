@@ -35,6 +35,14 @@
               <li><a href="{% url 'home_page' %}">Bosh sahifa</a></li>
               {% comment %} <li><a href="#">About</a></li> {% endcomment %}
               <li><a href="{% url 'contact_page' %}">Aloqa</a></li>
+              <li>
+              {% if user.is_authenticated %}
+                  {% csrf_token %}
+                    <a href="#">Chiqish</a>
+                  {% else %}
+                    <a href="{% url 'login_page' %}">Kirish</a>
+              {% endif %}
+                </li>
             </ul>
           </div>
           <div class="header_top_right">

@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     
     # create apps
     'news',
+    'accounts',
 ]
 
 MIDDLEWARE = [
