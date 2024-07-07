@@ -2,10 +2,10 @@
 {% load static %}
 
 {% block title %}
-  Yangiliklar
-{% endblock title %}
+  Yangiliklar | Yangilikni o'chirish
+{% endblock title %} 
 
-{% block category%}  
+{% block category %}  
   <section id="navArea">
     <nav class="navbar navbar-inverse" role="navigation">
       <div class="navbar-header">
@@ -13,7 +13,7 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav main_nav">
-          <li class="active"><a href="{% url 'home_page' %}"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
+          <li class="active"><a href="../index.html"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
           
           {% for category in category_list %}
             <li><a href="{{ category.get_absolute_url }}">{{category.name}}</a></li>
@@ -51,42 +51,21 @@
       </div>
     </div>
   </section>
-{% endblock category%}
+{% endblock category %}
 
 {% block content %}  
-  <section id="contentSection">
-    <div class="row">
-      <div class="col-lg-8 col-md-8 col-sm-8">
-        <div class="left_content">
-          <div class="single_page">
-            
-            <h1>{{news_detail.title}}</h1>
-            {% comment %} <div class="post_commentbox"> <a href="#"><i class="fa fa-user"></i>Wpfreeware</a> <span><i class="fa fa-calendar"></i>6:49 AM</span> <a href="#"><i class="fa fa-tags"></i>Technology</a> </div> {% endcomment %}
-            <div class="single_page_content"> <img class="img-center" src="{{news_detail.image.url}}" alt="">
-              <p>{{news_detail.body}}</p>
-            </div>
-            <div class="social_link">
-              <ul class="sociallink_nav">
-                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-              </ul>
-            </div>
-            
-            <center><h4><a href="{% url 'news_edit_page' news_detail.slug %}" style="color: rgb(18, 118, 3);">Yangilikni tahrirlash</a> <<< || >>> <a href="{% url 'news_delete_page' news_detail.slug %}" style="color: rgb(18, 118, 3);">Yangilikni o'chirish</a> <<< || >>> <a href="{% url 'news_create_page' news_detail.slug %}" style="color: rgb(18, 118, 3);">Yangilik Yaratish</a></h4></center>
-       
-            <div class="related_post">
-              {% comment %} comments {% endcomment %}
-            </div>
-          </div>
-        </div>
-      </div>
-     
-{% endblock content %}
+<h1 style="color: green;">Yangilikni o'chirish</h1>
+<br>
+<div class="col-lg-8 col-md-8 col-sm-8">
+  <form method="post">
+    {% csrf_token %}
+    {{news_detail.title}}
+    <button type="submit" style="color: red;">O'chirish</button>
+  </form>
+</div>
+{% endblock content %} 
 
-{% block content2 %}  
+{% block content2 %}
           <div class="single_sidebar">
             <ul class="nav nav-tabs" role="tablist">
               <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">Category</a></li>
@@ -112,16 +91,15 @@
                 <ul class="spost_nav">
 
                   <li>
-                    <div class="media wow fadeInDown"> <a href="single_page.html" class="media-left"> <img alt="" src="{% static 'news/images/post_img1.jpg' %}"> </a>
-                      <div class="media-body"> <a href="single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="{% static 'news/images/post_img1.jpg' %}"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
                     </div>
                   </li>
-                  
+                 
                 </ul>
               </div>
             </div>
           </div>
-
           <div class="single_sidebar wow fadeInDown">
             <h2><span>Sponsor</span></h2>
             <a class="sideAdd" href="#"><img src="{% static 'news/images/add_img.jpg' %}" alt=""></a> </div>
@@ -149,4 +127,3 @@
     </div>
   </section>
 {% endblock content2 %}
-  

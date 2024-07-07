@@ -1,4 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
+from django.views.generic import (
+    UpdateView, DeleteView, CreateView
+)
 from django.views import View
 
 from .models import (
@@ -81,3 +85,31 @@ class CategoryDetailPage(View):
         }
         
         return render(request=request, template_name='news/category_detail.html', context=context)
+    
+    
+class NewsUpdateView(UpdateView):
+    
+    model = NewsModel
+    fields = ('title', 'body', 'image', 'category', 'status')
+    template_name = 'crud/news_edit.html'
+    
+    def form_valid(self, form):
+        news = form.save(commit=False)
+        if news.status == NewsModel.Status.Deactive:
+            news.save()
+            return redirect('home_page')
+        return super().form_valid(form)
+    
+    
+class NewsDeleteView(DeleteView):
+    
+    model = NewsModel
+    template_name = 'crud/news_delete.html'
+    success_url = reverse_lazy('home_page')
+    
+    
+class NewsCreateView(CreateView):
+    
+    model = NewsModel
+    fields = ('title', 'slug', 'body', 'image', 'category', 'status')
+    template_name = 'crud/news_create.html'
