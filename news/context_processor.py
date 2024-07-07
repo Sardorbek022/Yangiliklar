@@ -6,7 +6,7 @@ from .models import (
 def UniversalView(self,):
     
     category_list = CategoryModel.objects.all()
-    latest_news_list = NewsModel.manager.all().order_by('-publish_time')[:10]
+    latest_news_list = NewsModel.manager.all().order_by('-publish_time')[:6]
 
     context = {
         'category_list' : category_list,

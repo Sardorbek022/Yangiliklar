@@ -16,7 +16,7 @@ class HomePageView(View):
         all_news_list = NewsModel.manager.all().order_by('-publish_time')
         uzb_news_list = NewsModel.manager.all().filter(category__name="O'ZBEKISTON").order_by('-publish_time')[:6]
         world_news_list = NewsModel.manager.all().filter(category__name="JAHON").order_by('-publish_time')[:6]
-        science_technology_news_list = NewsModel.manager.all().filter(category__name="FAN-TEXNIKA").order_by('-publish_time')[:6]
+        science_technology_news_list = NewsModel.manager.all().filter(category__name="FAN_TEXNIKA").order_by('-publish_time')[:6]
         sport_news_list = NewsModel.manager.all().filter(category__name="SPORT").order_by('-publish_time')[:6]
 
         
@@ -73,10 +73,11 @@ class CategoryDetailPage(View):
         # category_detail = NewsModel.objects.get(pk=pk)
         # category_detail = get_object_or_404(NewsModel, pk=pk)
         category_detail = get_object_or_404(CategoryModel, slug=category)
-        
+        category_news_list = NewsModel.manager.all().filter(category__name=category_detail).order_by('-publish_time')[:15]
         
         context = {
-            'category_detail' : category_detail
+            'category_detail' : category_detail,
+            'category_news_list' : category_news_list,
         }
         
         return render(request=request, template_name='news/category_detail.html', context=context)

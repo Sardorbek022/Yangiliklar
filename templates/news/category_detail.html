@@ -55,7 +55,13 @@
 
 {% block content %} 
 <div class="col-lg-8 col-md-8 col-sm-8"> 
-    {% lorem 1 b random %}
+
+    {% for category_news in category_news_list %}
+      <div class="media"> <a href="{{ category_news.get_absolute_url }}" class="media-left"> <img alt="" src="{{category_news.image.url}}"> </a>
+        <div class="media-body"> <a href="{{ category_news.get_absolute_url }}" class="catg_title">{{category_news.title | truncatewords:10}}</a> </div>
+      </div>
+    {% endfor %}
+
 </div>
 {% endblock content %}
 

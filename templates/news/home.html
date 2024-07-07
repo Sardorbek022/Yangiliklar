@@ -98,7 +98,13 @@
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="left_content">
           <div class="single_post_content">
-            <h2><span>O'zbekiston yangiliklari</span></h2>
+
+            {% for category in category_list %}
+              {% if category.name == "O'ZBEKISTON" %}
+                <h2><span><a href="{{ category.get_absolute_url }}" style="color: white;">O'zbekiston yangiliklari</a></span></h2>
+              {% endif %}
+            {% endfor %}
+
             <div class="single_post_content_left">
               <ul class="business_catgnav  wow fadeInDown">
 
@@ -134,7 +140,13 @@
           <div class="fashion_technology_area">
             <div class="fashion">
               <div class="single_post_content">
-                <h2><span>Jahon yangiliklari</span></h2>
+
+                {% for category in category_list %}
+                  {% if category.name == "JAHON" %}
+                    <h2><span><a href="{{ category.get_absolute_url }}" style="color: white;">Jahon yangiliklari</a></span></h2>
+                  {% endif %}
+                {% endfor %}
+
                 <ul class="business_catgnav wow fadeInDown">
 
                   {% for world_news in world_news_list %}
@@ -165,8 +177,14 @@
             </div>
             <div class="technology">
               <div class="single_post_content">
-                <h2><span>Fan-Texnika yangiliklari</span></h2>
-                <ul class="business_catgnav">
+
+                {% for category in category_list %}
+                  {% if category.name == "FAN_TEXNIKA" %}
+                    <h2><span><a href="{{ category.get_absolute_url }}" style="color: white;">Fan-Texnika yangiliklari</a></span></h2>
+                  {% endif %}
+                {% endfor %}
+
+                  <ul class="business_catgnav">
 
                   {% for science_technology_news in science_technology_news_list %}
                     {% if forloop.first %}
@@ -211,7 +229,13 @@
             </ul>
           </div>
           <div class="single_post_content">
-            <h2><span>Sport yangiliklari</span></h2>
+
+            {% for category in category_list %}
+              {% if category.name == "SPORT" %}
+                <h2><span><a href="{{ category.get_absolute_url }}" style="color: white;">Sport yangiliklari</a></span></h2>
+              {% endif %}
+           {% endfor %}
+
             <div class="single_post_content_left">
               <ul class="business_catgnav">
 

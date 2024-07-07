@@ -62,7 +62,7 @@
 
 <div class="col-lg-4 col-md-4 col-sm-4">
     <aside class="right_content">
-      <div class="single_sidebar">
+      <div class="single_sidebar" style="background-color: rgb(255, 255, 255);">
         <h2><span>Popular Post</span></h2>
         <ul class="spost_nav">
 
@@ -94,7 +94,7 @@
             <ul class="tag_nav">
 
               {% for category in category_list %}
-                    <li><a href="{% url 'category_detail_page' category.pk %}">{{category.name}}</a></li>
+                    <li><a href="{{ category.get_absolute_url }}">{{category.name}}</a></li>
               {% endfor %}
 
             </ul>
