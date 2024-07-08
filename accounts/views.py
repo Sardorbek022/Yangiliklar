@@ -48,4 +48,11 @@ class UserLogin(View):
 
        
         
-     
+class DashboardView(View):
+    def get(self,request):
+        user = request.user
+        context = {
+            'user' : user
+        }
+        
+        return render(request=request, template_name='pages/user_profile.html', context=context)    

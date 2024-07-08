@@ -1,0 +1,131 @@
+{% extends "news/base.html" %}
+{% load static %}
+
+{% block title %}
+  Yangiliklar | Foydalanuvchi profili
+{% endblock title %} 
+
+{% block category %}
+  <section id="navArea">
+    <nav class="navbar navbar-inverse" role="navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav main_nav">
+          <li class="active"><a href="{% url 'home_page' %}"><span class="fa fa-home desktop-home"></span><span class="mobile-show">Home</span></a></li>
+          
+          {% for category in category_list %}
+            <li><a href="{{ category.get_absolute_url }}">{{category.name}}</a></li>
+          {% endfor %}
+
+        </ul>
+      </div>
+    </nav>
+  </section>
+
+  <section id="newsSection">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="latest_newsarea"> <span>So'ngi yangiliklar</span>
+          <ul id="ticker01" class="news_sticker">
+
+            {% for latest_news in latest_news_list %}
+              <li><a href="{{ latest_news.get_absolute_url }}"><img src="{{latest_news.image.url}}" alt="">{{latest_news.title | truncatewords:5}}</a></li>
+            {% endfor %}
+        
+          </ul>
+          <div class="social_area">
+            <ul class="social_nav">
+              <li class="facebook"><a href="#"></a></li>
+              <li class="twitter"><a href="#"></a></li>
+              <li class="flickr"><a href="#"></a></li>
+              <li class="pinterest"><a href="#"></a></li>
+              <li class="googleplus"><a href="#"></a></li>
+              <li class="vimeo"><a href="#"></a></li>
+              <li class="youtube"><a href="#"></a></li>
+              <li class="mail"><a href="#"></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock category %}
+
+{% block content %} 
+<div class="col-lg-8 col-md-8 col-sm-8"> 
+
+  <h4 style="color: rgb(15, 17, 16);">Xush kelibsiz <p style="color: red;">{{user.last_name}}</p> <p style="color: red;">{{user.first_name}}</p> 
+    Sizning Username <p style="color: red;">'{{user.username}}'</p> va sizning emailingiz <p style="color: red;">'{{user.email}}'</p></h4>
+    <br>
+  <form action="{% url 'logout_page' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" style="color: green">Akkauntdan chiqish</button>
+  </form>
+</div>
+
+{% endblock content %}
+
+{% block content2 %}
+          <div class="single_sidebar">
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">Category</a></li>
+              <li role="presentation"><a href="#video" aria-controls="profile" role="tab" data-toggle="tab">Video</a></li>
+              <li role="presentation"><a href="#comments" aria-controls="messages" role="tab" data-toggle="tab">Comments</a></li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="category">
+                <ul>
+                  
+                  {% for category in category_list %}
+                    <li class="cat-item"><a href="{{ category.get_absolute_url }}">{{category.name}}</a></li>
+                  {% endfor %}
+                  
+                </ul>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="video">
+                <div class="vide_area">
+                  <iframe width="100%" height="250" src="http://www.youtube.com/embed/h5QWbURNEpA?feature=player_detailpage" frameborder="0" allowfullscreen></iframe>
+                </div>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="comments">
+                <ul class="spost_nav">
+
+                  <li>
+                    <div class="media wow fadeInDown"> <a href="pages/single_page.html" class="media-left"> <img alt="" src="{% static 'news/images/post_img1.jpg' %}"> </a>
+                      <div class="media-body"> <a href="pages/single_page.html" class="catg_title"> Aliquam malesuada diam eget turpis varius 1</a> </div>
+                    </div>
+                  </li>
+                 
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="single_sidebar wow fadeInDown">
+            <h2><span>Sponsor</span></h2>
+            <a class="sideAdd" href="#"><img src="{% static 'news/images/add_img.jpg' %}" alt=""></a> </div>
+          <div class="single_sidebar wow fadeInDown">
+            <h2><span>Category Archive</span></h2>
+            <select class="catgArchive">
+              <option>Select Category</option>
+              <option>Life styles</option>
+              <option>Sports</option>
+              <option>Technology</option>
+              <option>Treads</option>
+            </select>
+          </div>
+          <div class="single_sidebar wow fadeInDown">
+            <h2><span>Links</span></h2>
+            <ul>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Rss Feed</a></li>
+              <li><a href="#">Login</a></li>
+              <li><a href="#">Life &amp; Style</a></li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+{% endblock content2 %}
