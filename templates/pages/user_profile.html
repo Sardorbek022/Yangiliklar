@@ -63,6 +63,10 @@
     {% csrf_token %}
     <button type="submit" style="color: green">Akkauntdan chiqish</button>
   </form>
+
+  {% if user.is_authenticated %}
+    <a href='{% url "password-change_page" %}'>Parolni o'zgartirish</a>
+  {% endif %}
 </div>
 
 {% endblock content %}
