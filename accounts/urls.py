@@ -5,11 +5,12 @@ from django.contrib.auth.views import (
 )
 
 from .views import (
-    UserLogin, DashboardView 
+    UserLogin, DashboardView, UserRegistrationView
 )
 
 
 urlpatterns = [
+    path('register/', view=UserRegistrationView, name='register_page'),
     # path('login/', view=UserLogin.as_view(), name='login_page'),
     path('login/', view=LoginView.as_view(), name='login_page'),
     path('logout/', view=LogoutView.as_view(), name='logout_page'),
