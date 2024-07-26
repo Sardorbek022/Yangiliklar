@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import View
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import CreateView
 
 from .forms import (
     LoginForm, UserRegistrationForm
@@ -79,3 +82,10 @@ def UserRegistrationView(request):
         user_form = UserRegistrationForm()
         context = {"user_form": user_form}
         return render(request, 'account/register.html', context)
+    
+
+class SignUpView(CreateView):
+    
+    form_class = UserCreationForm
+    success_url = reverse_lazy('home_page')
+    template_name = 'account/register.html'

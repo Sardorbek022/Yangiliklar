@@ -5,12 +5,13 @@ from django.contrib.auth.views import (
 )
 
 from .views import (
-    UserLogin, DashboardView, UserRegistrationView
+    UserLogin, DashboardView, UserRegistrationView, SignUpView
 )
 
 
 urlpatterns = [
-    path('register/', view=UserRegistrationView, name='register_page'),
+    # path('register/', view=UserRegistrationView, name='register_page'),
+    path('signup/', view=SignUpView.as_view(), name='register_page'),
     # path('login/', view=UserLogin.as_view(), name='login_page'),
     path('login/', view=LoginView.as_view(), name='login_page'),
     path('logout/', view=LogoutView.as_view(), name='logout_page'),
