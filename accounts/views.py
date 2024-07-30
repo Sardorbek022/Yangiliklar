@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 
 from .forms import (
-    LoginForm, UserRegistrationForm
+    LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
 )
 from .models import (
     ProfileModel
@@ -42,7 +42,6 @@ class UserLogin(View):
                 context = {
                     'form': form,
                 }
-                print(form)
                 
                 return render(request=request, template_name='registration/login.html', context=context)
         else:
@@ -58,8 +57,10 @@ class UserLogin(View):
 class DashboardView(View):
     def get(self,request):
         user = request.user
+        profile = ProfileModel.objects.get(user=user)
         context = {
-            'user' : user
+            'user' : user,
+            'profile' : profile
         }
         
         return render(request=request, template_name='pages/user_profile.html', context=context)    
@@ -84,8 +85,29 @@ def UserRegistrationView(request):
         return render(request, 'account/register.html', context)
     
 
-class SignUpView(CreateView):
+# class SignUpView(CreateView):
     
-    form_class = UserCreationForm
-    success_url = reverse_lazy('home_page')
-    template_name = 'account/register.html'
+#     form_class = UserCreationForm
+#     success_url = reverse_lazy('home_page')
+#     template_name = 'account/register.html'
+
+
+def Edit_User_View(request):
+    
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST,)
+        profile_form = ProfileEditForm(instance=request.user.profile,
+                                       data=request.POST,
+                                       files=request.FILES)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            
+            return redirect('user_profile_page')
+            
+    else:
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    
+    return render(request=request, template_name='pages/user_edit.html', context={'user_form' : user_form, 'profile_form' : profile_form})

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-  Yangiliklar | Foydalanuvchi profili
+  Yangiliklar | Foydalanuvchi profilini tahrirlash
 {% endblock title %} 
 
 {% block category %}
@@ -55,38 +55,12 @@
 
 {% block content %} 
 <div class="col-lg-8 col-md-8 col-sm-8"> 
-
-  <center style="color: green;">
-    <h3>
-    <p> Xush kelibsiz: {{user.last_name}} {{user.first_name}}</p> 
-    <p> Sizning Username: '{{user.username}}'</p> 
-    <p> Sizning email: {{user.email}}</p>
-    <p>
-      Sizning manzil: {% if profile.address %}{{ profile.address }}{% else %}Bunaqa ma'lumot yo'q{% endif %}
-    </p>
-    <p>
-      Sizning tug'ilgan kuningiz: {% if profile.date_of_birth %}{{ profile.date_of_birth }}{% else %}Bunaqa ma'lumot yo'q{% endif %}
-    </p>
-    <img src="{% if profile.photo %}{{ profile.photo.url }}{% else %}{% static 'images/1.png' %}{% endif %}" alt="Profile Photo">    </h3>
-    <br>
-    <form action="{% url 'logout_page' %}" method="post">
-      {% csrf_token %}
-      <button type="submit" style="color: green">Akkauntdan chiqish</button>
+    <form method="Post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{user_form.as_p}}
+        {{profile_form}}
+        <button type="submit">Tastiqlash</button>
     </form>
-
-  </center>
-
-  <center>
-    {% if user.is_authenticated %}
-      <br>
-      <a href='{% url "password-change_page" %}' style="color: red;">Parolni o'zgartirish</a>
-      <br>
-      <a href='{% url "password-reset" %}' style="color: red;">Parolni tiklash</a>
-      <br>
-      <a href='{% url "user_edit_page" %}' style="color: red;">Profilni tahrirlash</a> 
-    {% endif %}
-  </center>
-
 </div>
 
 {% endblock content %}
