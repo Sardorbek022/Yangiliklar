@@ -16,12 +16,12 @@
         <br>
         <center><h1 style="color: rgb(255, 255, 255);">Ro'yxatdan o'tish</h1></center>
         <br>
-        {{ form.as_p }}
-        {% comment %} {{ user_form.username }}
+        {% comment %} {{ form.as_p }} {% endcomment %}
+        {{ user_form.username }}
         {{ user_form.first_name }}
         {{ user_form.email }}
         {{ user_form.password }}
-        {{ user_form.password_2 }} {% endcomment %}
+        {{ user_form.password_2 }}
         <button type="submit"><h2>Tastiqlash</h2></button>
       </form>
       <center><h2><a href="{% url 'login_page' %}" style="color: rgb(0, 0, 255);">Saytga kirish</a></h2></center>

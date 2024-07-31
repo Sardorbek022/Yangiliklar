@@ -111,3 +111,25 @@ def Edit_User_View(request):
         profile_form = ProfileEditForm(instance=request.user.profile)
     
     return render(request=request, template_name='pages/user_edit.html', context={'user_form' : user_form, 'profile_form' : profile_form})
+
+
+class EditUserView(View):
+    
+    def get(self, request):
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+    
+        return render(request=request, template_name='pages/user_edit.html', context={'user_form' : user_form, 'profile_form' : profile_form})
+
+    
+    def post(self, request):
+        user_form = UserEditForm(instance=request.user, data=request.POST,)
+        profile_form = ProfileEditForm(instance=request.user.profile,
+                                                    data=request.POST,
+                                                    files=request.FILES)
+        
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            
+            return redirect('user_profile_page')
