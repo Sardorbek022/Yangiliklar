@@ -6,6 +6,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .forms import (
     LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
@@ -54,7 +55,7 @@ class UserLogin(View):
             return render(request=request, template_name='registration/login.html', context=context)
 
             
-class DashboardView(View):
+class DashboardView(LoginRequiredMixin, View):
     def get(self,request):
         user = request.user
         profile = ProfileModel.objects.get(user=user)
@@ -114,7 +115,7 @@ def Edit_User_View(request):
     return render(request=request, template_name='pages/user_edit.html', context={'user_form' : user_form, 'profile_form' : profile_form})
 
 
-class EditUserView(View):
+class EditUserView(LoginRequiredMixin, View):
     
     def get(self, request):
         user_form = UserEditForm(instance=request.user, data=request.POST)

@@ -4,6 +4,7 @@ from django.views.generic import (
     UpdateView, DeleteView, CreateView
 )
 from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from .models import (
     NewsModel, ContactModel, CategoryModel
@@ -14,7 +15,7 @@ from .forms import (
 )
 
 
-class HomePageView(View):
+class HomePageView(LoginRequiredMixin, View):
     
     def get(self,request):
         all_news_list = NewsModel.manager.all().order_by('-publish_time')
@@ -35,7 +36,7 @@ class HomePageView(View):
         return render(request=request, template_name='news/home.html', context=context)
     
     
-class ContactPageView(View):
+class ContactPageView(LoginRequiredMixin, View):
     
     def get(self, request):
             return render(request=request, template_name='news/contact.html')
@@ -53,7 +54,7 @@ class ContactPageView(View):
         
     
     
-class NewsDetailPage(View):
+class NewsDetailPage(LoginRequiredMixin, View):
     
     def get(self, request, news):
         
@@ -70,7 +71,7 @@ class NewsDetailPage(View):
         return render(request=request, template_name='news/news_detail.html', context=context)
     
     
-class CategoryDetailPage(View):
+class CategoryDetailPage(LoginRequiredMixin, View):
     
     def get(self, request, category):
         
@@ -87,7 +88,7 @@ class CategoryDetailPage(View):
         return render(request=request, template_name='news/category_detail.html', context=context)
     
     
-class NewsUpdateView(UpdateView):
+class NewsUpdateView(LoginRequiredMixin, UpdateView):
     
     model = NewsModel
     fields = ('title', 'body', 'image', 'category', 'status')
@@ -101,14 +102,14 @@ class NewsUpdateView(UpdateView):
         return super().form_valid(form)
     
     
-class NewsDeleteView(DeleteView):
+class NewsDeleteView(LoginRequiredMixin, DeleteView):
     
     model = NewsModel
     template_name = 'crud/news_delete.html'
     success_url = reverse_lazy('home_page')
     
     
-class NewsCreateView(CreateView):
+class NewsCreateView(LoginRequiredMixin, CreateView):
     
     model = NewsModel
     fields = ('title', 'slug', 'body', 'image', 'category', 'status')
