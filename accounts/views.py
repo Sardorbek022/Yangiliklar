@@ -5,6 +5,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import CreateView
+from django.contrib.auth.decorators import login_required
 
 from .forms import (
     LoginForm, UserRegistrationForm, UserEditForm, ProfileEditForm
@@ -52,8 +53,7 @@ class UserLogin(View):
             
             return render(request=request, template_name='registration/login.html', context=context)
 
-       
-        
+            
 class DashboardView(View):
     def get(self,request):
         user = request.user
@@ -65,7 +65,7 @@ class DashboardView(View):
         
         return render(request=request, template_name='pages/user_profile.html', context=context)    
     
-
+    
 def UserRegistrationView(request):
     if request.method == "POST":
         user_form = UserRegistrationForm(request.POST)
@@ -92,6 +92,7 @@ def UserRegistrationView(request):
 #     template_name = 'account/register.html'
 
 
+@login_required
 def Edit_User_View(request):
     
     if request.method == 'POST':
