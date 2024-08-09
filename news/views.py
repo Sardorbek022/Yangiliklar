@@ -1,5 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required, user_passes_test
 from core.custom_permissions import OnlyLoggedSuperUser
 from django.views.generic import (
     UpdateView, DeleteView, CreateView
@@ -115,3 +117,16 @@ class NewsCreateView(OnlyLoggedSuperUser, CreateView):
     model = NewsModel
     fields = ('title', 'slug', 'body', 'image', 'category', 'status')
     template_name = 'crud/news_create.html'
+
+
+@login_required
+@user_passes_test(lambda u:u.is_superuser)
+def admin_page_view(request):
+
+    admin_users = User.objects.filter(is_superuser=True)
+
+    context = {
+        'admin_users' : admin_users
+    }
+
+    return render(request=request, template_name='pages/admins.html', context=context)

@@ -2,13 +2,14 @@ from django.urls import path
 
 from .views import (
     HomePageView, ContactPageView, NewsDetailPage, CategoryDetailPage, 
-    NewsUpdateView, NewsDeleteView, NewsCreateView
+    NewsUpdateView, NewsDeleteView, NewsCreateView, admin_page_view
 )
 
 
 urlpatterns = [
     path('', view=HomePageView.as_view(), name='home_page'),
     path('contact/', view=ContactPageView.as_view(), name='contact_page'),
+    path('admin-page/', view=admin_page_view, name='admin_page'),
     # path('news-detail/<int:pk>/', view=NewsDetailPage.as_view(), name='news_detail_page'),
     path('news/<slug:news>/', view=NewsDetailPage.as_view(), name='news_detail_page'),
     # path('category-detail/<int:pk>/', view=CategoryDetailPage.as_view(), name='category_detail_page'),

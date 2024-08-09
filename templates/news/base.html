@@ -40,7 +40,11 @@
 
                       <a href="{% url 'user_profile_page' %}">Profilga kirish</a>
                       <a href="#" id="logout-link">Chiqish</a>
-                    
+
+                      {% if user.is_superuser %}
+                        <a href="{% url "admin_page" %}" id="logout-link">Adminlar sahifasi</a>
+                      {% endif %}
+
                       <form id="logout-form" action="{% url 'logout_page' %}" method="post" style="display: none;">
                         {% csrf_token %}
                       </form>
