@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
+from core.custom_permissions import OnlyLoggedSuperUser
 from django.views.generic import (
     UpdateView, DeleteView, CreateView
 )
@@ -88,7 +89,7 @@ class CategoryDetailPage(LoginRequiredMixin, View):
         return render(request=request, template_name='news/category_detail.html', context=context)
     
     
-class NewsUpdateView(LoginRequiredMixin, UpdateView):
+class NewsUpdateView(OnlyLoggedSuperUser, UpdateView):
     
     model = NewsModel
     fields = ('title', 'body', 'image', 'category', 'status')
@@ -102,14 +103,14 @@ class NewsUpdateView(LoginRequiredMixin, UpdateView):
         return super().form_valid(form)
     
     
-class NewsDeleteView(LoginRequiredMixin, DeleteView):
+class NewsDeleteView(OnlyLoggedSuperUser, DeleteView):
     
     model = NewsModel
     template_name = 'crud/news_delete.html'
     success_url = reverse_lazy('home_page')
     
     
-class NewsCreateView(LoginRequiredMixin, CreateView):
+class NewsCreateView(OnlyLoggedSuperUser, CreateView):
     
     model = NewsModel
     fields = ('title', 'slug', 'body', 'image', 'category', 'status')
