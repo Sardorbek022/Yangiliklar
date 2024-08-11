@@ -1,7 +1,7 @@
 from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
-from django.db.models import F
+from django.db.models import F, Sum
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
@@ -33,14 +33,13 @@ class HomePageView(LoginRequiredMixin, View):
         world_news_list = NewsModel.manager.all().filter(category__name="JAHON").order_by('-publish_time')[:6]
         science_technology_news_list = NewsModel.manager.all().filter(category__name="FAN_TEXNIKA").order_by('-publish_time')[:6]
         sport_news_list = NewsModel.manager.all().filter(category__name="SPORT").order_by('-publish_time')[:6]
-
         
         context = {
             'all_news_list' : all_news_list,
             'uzb_news_list' : uzb_news_list,
             'world_news_list' : world_news_list,
             'science_technology_news_list' : science_technology_news_list,
-            'sport_news_list' : sport_news_list
+            'sport_news_list' : sport_news_list,
         }
 
         return render(request=request, template_name='news/home.html', context=context)
@@ -86,6 +85,7 @@ class NewsDetailPage(LoginRequiredMixin, HitCountMixin, View):
 
         comment_form = CommentForm()
         comments = news_detail.comments.filter(active=True)
+        comment_count = comments.count()
         new_comment = None
         
         context = {
@@ -93,7 +93,8 @@ class NewsDetailPage(LoginRequiredMixin, HitCountMixin, View):
             'comments' : comments,
             'new_comment' : new_comment,
             'comment_form' : comment_form,
-            'hit_count': hit_count.hits
+            'hit_count': hit_count.hits,
+            'comment_count' : comment_count
         }
         
         return render(request=request, template_name='news/news_detail.html', context=context)
