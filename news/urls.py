@@ -2,7 +2,7 @@ from django.urls import path
 
 from .views import (
     HomePageView, ContactPageView, NewsDetailPage, CategoryDetailPage, 
-    NewsUpdateView, NewsDeleteView, NewsCreateView, admin_page_view
+    NewsUpdateView, NewsDeleteView, NewsCreateView, admin_page_view, SearchResultsListView
 )
 
 
@@ -17,4 +17,5 @@ urlpatterns = [
     path('news/<slug>/news-edit/', view=NewsUpdateView.as_view(), name='news_edit_page'),
     path('news/<slug>/news-delete/', view=NewsDeleteView.as_view(), name='news_delete_page'),
     path('news/<slug>/news-create/', view=NewsCreateView.as_view(), name='news_create_page'),
+    path('searchresult/', view=SearchResultsListView.as_view(), name='search_result_page')
 ]

@@ -1,8 +1,11 @@
+from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
+from django.db.models import Q
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from core.custom_permissions import OnlyLoggedSuperUser
+from django.views.generic import ListView
 from django.views.generic import (
     UpdateView, DeleteView, CreateView
 )
@@ -155,3 +158,16 @@ def admin_page_view(request):
     }
 
     return render(request=request, template_name='pages/admins.html', context=context)
+
+
+class SearchResultsListView(LoginRequiredMixin, ListView):
+    model = NewsModel
+    template_name = 'news/search_result.html'
+    context_object_name = 'all_news'
+
+    def get_queryset(self):
+        query = self.request.GET.get('q')
+        
+        return NewsModel.objects.filter(
+            Q(title__icontains=query) | Q(body__icontains=query)
+        )

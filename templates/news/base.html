@@ -68,9 +68,13 @@
               </li>
             </ul>
           </div>
-          <div class="header_top_right">
-            <p>{% now 'F Y H:i' %}</p>
+          <div class="header_top_right d-inline-block">
+            <p class="header_top_right">{% now 'F Y H:i' %}</p>
+            <form method="get" class="d-inline", action="{% url 'search_result_page' %}">
+              <input type="search" name="q" placeholder="Qidiruv ..." class="form-control d-inline" style="width: auto;">
+            </form>
           </div>
+      
         </div>
       </div>
       <div class="col-lg-12 col-md-12 col-sm-12">
