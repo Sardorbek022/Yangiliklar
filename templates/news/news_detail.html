@@ -61,6 +61,10 @@
           <div class="single_page">
             
             <h1>{{news_detail.title}}</h1>
+            <br>
+            <span style="color: green;">Yaratilgan vaqti: {{news_detail.created_time}}</span>
+            <br>
+            <span style="color: green;">Ko'rilganlar soni: {{news_detail.view_count}}</span>
             {% comment %} <div class="post_commentbox"> <a href="#"><i class="fa fa-user"></i>Wpfreeware</a> <span><i class="fa fa-calendar"></i>6:49 AM</span> <a href="#"><i class="fa fa-tags"></i>Technology</a> </div> {% endcomment %}
             <div class="single_page_content"> <img class="img-center" src="{{news_detail.image.url}}" alt="">
               <p>{{news_detail.body}}</p>

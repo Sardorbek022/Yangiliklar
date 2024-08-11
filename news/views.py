@@ -66,6 +66,8 @@ class NewsDetailPage(LoginRequiredMixin, View):
         # news_detail = NewsModel.objects.get(pk=pk)
         # news_detail = get_object_or_404(NewsModel, pk=pk)
         news_detail = get_object_or_404(NewsModel, slug=news, status=NewsModel.Status.Active)
+        news_detail.view_count = news_detail.view_count + 1
+        news_detail.save()
         comment_form = CommentForm()
         comments = news_detail.comments.filter(active=True)
         new_comment = None
