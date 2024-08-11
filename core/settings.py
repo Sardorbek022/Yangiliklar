@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # install apps
     'jazzmin',
+    'hitcount',
     
     # default apps
     'django.contrib.admin',

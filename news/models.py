@@ -48,7 +48,7 @@ class NewsModel(models.Model):
                               default=Status.Deactive,
                               verbose_name='Holati'
                               )
-    view_count = models.IntegerField(default=0)
+    # view_count = models.IntegerField(default=0)
     objects = models.Manager()
     manager = ActivedManager()
     

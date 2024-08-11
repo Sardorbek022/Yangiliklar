@@ -1,11 +1,15 @@
 from django.db.models.query import QuerySet
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
+from django.db.models import F
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required, user_passes_test
 from core.custom_permissions import OnlyLoggedSuperUser
 from django.views.generic import ListView
+from hitcount.models import HitCount
+from django.contrib.contenttypes.models import ContentType
+from hitcount.views import HitCountMixin
 from django.views.generic import (
     UpdateView, DeleteView, CreateView
 )
@@ -60,14 +64,26 @@ class ContactPageView(LoginRequiredMixin, View):
         
     
     
-class NewsDetailPage(LoginRequiredMixin, View):
+class NewsDetailPage(LoginRequiredMixin, HitCountMixin, View):
     
     def get(self, request, news):
         # news_detail = NewsModel.objects.get(pk=pk)
         # news_detail = get_object_or_404(NewsModel, pk=pk)
         news_detail = get_object_or_404(NewsModel, slug=news, status=NewsModel.Status.Active)
-        news_detail.view_count = news_detail.view_count + 1
-        news_detail.save()
+        # news_detail.view_count = news_detail.view_count + 1
+        # news_detail.save()
+        content_type = ContentType.objects.get_for_model(news_detail)
+        hit_count, created = HitCount.objects.get_or_create(
+            content_type=content_type,
+            object_pk=news_detail.pk
+        )
+
+        # HitCountni yangilash
+        self.hit_count(request, hit_count)
+
+        # HitCount ob'ektini bazadan qayta yuklash, shunda yangilangan qiymatni to'g'ri ko'rinadi
+        hit_count.refresh_from_db()
+
         comment_form = CommentForm()
         comments = news_detail.comments.filter(active=True)
         new_comment = None
@@ -76,7 +92,8 @@ class NewsDetailPage(LoginRequiredMixin, View):
             'news_detail' : news_detail,
             'comments' : comments,
             'new_comment' : new_comment,
-            'comment_form' : comment_form
+            'comment_form' : comment_form,
+            'hit_count': hit_count.hits
         }
         
         return render(request=request, template_name='news/news_detail.html', context=context)
