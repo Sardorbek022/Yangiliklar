@@ -80,8 +80,32 @@
             {% endif %}
 
             <div class="related_post">
-              {% comment %} comments {% endcomment %}
+              {% for comment in comments %}
+                <p class="font-weight-bold">
+                  {{comment.user}}
+                <span class="text-muted font-weight-normal">
+                  {{comment.created_time}}
+                </span>
+                </p>
+                {{comment.body | linebreaks }}
+              {% endfor %}
             </div>
+
+            {% if request.user.is_authenticated%}
+              <div class="col-md-8 card mb-4 mt-3">
+                <div class="card-body">
+                  <h3>Izoh qoldirish</h3>
+                  <form method="post" style="margin-top: 1.3em">
+                    {% csrf_token %}
+                    {{comment_form.as_p}}
+                    <button type="submit">
+                      Yuborosh
+                    </button>
+                  </form>
+                </div>
+              </div>
+            {% endif %}
+
           </div>
         </div>
       </div>

@@ -14,7 +14,7 @@ from .models import (
 )
 
 from .forms import (
-    ContactForm, 
+    ContactForm, CommentForm
 )
 
 
@@ -60,18 +60,43 @@ class ContactPageView(LoginRequiredMixin, View):
 class NewsDetailPage(LoginRequiredMixin, View):
     
     def get(self, request, news):
-        
         # news_detail = NewsModel.objects.get(pk=pk)
         # news_detail = get_object_or_404(NewsModel, pk=pk)
         news_detail = get_object_or_404(NewsModel, slug=news, status=NewsModel.Status.Active)
-
-        
+        comment_form = CommentForm()
+        comments = news_detail.comments.filter(active=True)
+        new_comment = None
         
         context = {
-            'news_detail' : news_detail
+            'news_detail' : news_detail,
+            'comments' : comments,
+            'new_comment' : new_comment,
+            'comment_form' : comment_form
         }
         
         return render(request=request, template_name='news/news_detail.html', context=context)
+    
+    def post(self, request, news):
+        news_detail = get_object_or_404(NewsModel, slug=news, status=NewsModel.Status.Active)
+        comment_form = CommentForm(data=request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.news = news_detail
+            new_comment.user = request.user
+            new_comment.save()
+            comment_form = CommentForm()
+            return redirect(news_detail.get_absolute_url())
+        else:
+            # Agar forma noto'g'ri bo'lsa, xatoliklarni ko'rsatish
+            context = {
+                'news_detail': news_detail,
+                'comments': news_detail.comments.filter(active=True),
+                'new_comment': None,
+                'comment_form': comment_form
+            }
+            return render(request, 'news/news_detail.html', context)
+
+
     
     
 class CategoryDetailPage(LoginRequiredMixin, View):

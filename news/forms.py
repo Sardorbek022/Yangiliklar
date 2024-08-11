@@ -1,7 +1,7 @@
 from django import forms
 
 from .models import (
-    ContactModel
+    ContactModel, CommentModel
 )
 
 
@@ -10,3 +10,10 @@ class ContactForm(forms.ModelForm):
         model = ContactModel
         # fields = ['name', 'email', 'message']
         fields = '__all__'
+
+
+class CommentForm(forms.ModelForm):
+
+    class Meta:
+        model = CommentModel
+        fields = ['body']

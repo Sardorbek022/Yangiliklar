@@ -1,6 +1,7 @@
 from django.utils import timezone
 from django.urls import reverse
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class CategoryModel(models.Model):
@@ -63,6 +64,28 @@ class NewsModel(models.Model):
         managed = True
         verbose_name = 'Yangiliklar'
         verbose_name_plural = 'Yangiliklar'
+
+
+class CommentModel(models.Model):
+    news = models.ForeignKey(NewsModel,
+                             on_delete=models.CASCADE,
+                             related_name='comments')
+    user = models.ForeignKey(User, 
+                             on_delete=models.CASCADE,
+                             related_name='comments')
+    body = models.TextField()
+    created_time = models.DateTimeField(auto_now_add=True)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        ordering = ['-created_time']
+        db_table = 'Comments'
+        managed = True
+        verbose_name = 'Izoh'
+        verbose_name_plural = 'Izohlar'
+
+    def __str__(self):
+        return f"Comment = {self.body} by {self.user}"
         
     
 class ContactModel(models.Model):
