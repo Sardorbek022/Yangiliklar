@@ -28,11 +28,12 @@ from .forms import (
 class HomePageView(LoginRequiredMixin, View):
     
     def get(self,request):
+        all_category = CategoryModel.objects.all()
         all_news_list = NewsModel.manager.all().order_by('-publish_time')
-        uzb_news_list = NewsModel.manager.all().filter(category__name="O'ZBEKISTON").order_by('-publish_time')[:6]
-        world_news_list = NewsModel.manager.all().filter(category__name="JAHON").order_by('-publish_time')[:6]
-        science_technology_news_list = NewsModel.manager.all().filter(category__name="FAN_TEXNIKA").order_by('-publish_time')[:6]
-        sport_news_list = NewsModel.manager.all().filter(category__name="SPORT").order_by('-publish_time')[:6]
+        uzb_news_list = NewsModel.manager.all().filter(category__name=all_category[0]).order_by('-publish_time')[:6]
+        world_news_list = NewsModel.manager.all().filter(category__name=all_category[1]).order_by('-publish_time')[:6]
+        science_technology_news_list = NewsModel.manager.all().filter(category__name=all_category[2]).order_by('-publish_time')[:6]
+        sport_news_list = NewsModel.manager.all().filter(category__name=all_category[3]).order_by('-publish_time')[:6]
         
         context = {
             'all_news_list' : all_news_list,
@@ -40,6 +41,7 @@ class HomePageView(LoginRequiredMixin, View):
             'world_news_list' : world_news_list,
             'science_technology_news_list' : science_technology_news_list,
             'sport_news_list' : sport_news_list,
+            'all_category' : all_category
         }
 
         return render(request=request, template_name='news/home.html', context=context)
