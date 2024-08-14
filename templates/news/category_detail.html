@@ -1,8 +1,9 @@
 {% extends "news/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-  Yangiliklar | 
+{% blocktrans %}Yangiliklar | Katigoriya bo'yicha{% endblocktrans %}
 {% endblock title %}
 
 {% block category %}
@@ -27,7 +28,7 @@
   <section id="newsSection">
     <div class="row">
       <div class="col-lg-12 col-md-12">
-        <div class="latest_newsarea"> <span>So'ngi yangiliklar</span>
+        <div class="latest_newsarea"> <span>{% blocktrans %}So'ngi yangiliklari{% endblocktrans %}</span>
           <ul id="ticker01" class="news_sticker">
 
             {% for latest_news in latest_news_list %}
@@ -68,7 +69,7 @@
 {% block content2 %}
           <div class="single_sidebar">
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">Katigoriya</a></li>
+              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">{% blocktrans %}Katigoriyalar{% endblocktrans %}</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="category">

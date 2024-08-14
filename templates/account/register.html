@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Ro'yxatdan o'tish</title>
+  <title>{% blocktrans %}Ro'yxatdan o'tish{% endblocktrans %}</title>
   <link rel="stylesheet" href="{% static 'account/style.css' %}">
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
@@ -11,10 +12,26 @@
   <div class="main">  	
     <input type="checkbox" id="chk" aria-hidden="true">
     <div class="signup">
+      <center>
+        <form action="{% url 'set_language' %}" method="post" id="languageForm">
+          {% csrf_token %}
+          <input name="next" type="hidden" value="{{ redirect_to }}">
+          <select name="language" onchange="document.getElementById('languageForm').submit();">
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+                  <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                      {{ language.name_local }} ({{ language.code }})
+                  </option>
+              {% endfor %}
+        </select>
+        </form>
+      </center>
       <form method="post" action="{% url 'register_page' %}">
         {% csrf_token %}
         <br>
-        <center><h1 style="color: rgb(255, 255, 255);">Ro'yxatdan o'tish</h1></center>
+        <center><h1 style="color: rgb(255, 255, 255);">{% blocktrans %}Ro'yxatdan o'tish{% endblocktrans %}</h1></center>
         <br>
         {% comment %} {{ form.as_p }} {% endcomment %}
         {{ user_form.username }}
@@ -22,9 +39,22 @@
         {{ user_form.email }}
         {{ user_form.password }}
         {{ user_form.password_2 }}
-        <button type="submit"><h2>Tastiqlash</h2></button>
+        <button type="submit"><h2>{% blocktrans %}Tasdiqlash{% endblocktrans %}</h2></button>
       </form>
-      <center><h2><a href="{% url 'login_page' %}" style="color: rgb(0, 0, 255);">Saytga kirish</a></h2></center>
+      <center><h2><a href="{% url 'login_page' %}" style="color: rgb(0, 0, 255);">{% blocktrans %}Saytga kirish{% endblocktrans %}</a></h2></center>
+      <script>
+        const username = document.querySelector('#id_username');
+        const first_name = document.querySelector('#id_first_name');
+        const email = document.querySelector('#id_email');
+        const password = document.querySelector('#id_password');
+        const password_2 = document.querySelector('#id_password_2');
+
+        username.placeholder = "{% blocktrans %}Foydalanuvchi nomi{% endblocktrans %}";
+        first_name.placeholder = "{% blocktrans %}Ism{% endblocktrans %}";
+        email.placeholder = "{% blocktrans %}Email{% endblocktrans %}";
+        password.placeholder = "{% blocktrans %}Parol{% endblocktrans %}";
+        password_2.placeholder = "{% blocktrans %}Parolni takrorlang{% endblocktrans %}";
+    </script>
     </div>
   </div>
 </body>

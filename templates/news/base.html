@@ -33,17 +33,17 @@
         <div class="header_top">
           <div class="header_top_left">
             <ul class="top_nav">
-              <li><a href="{% url 'home_page' %}">Bosh sahifa</a></li>
+              <li><a href="{% url 'home_page' %}">{% blocktrans %}Bosh sahifa{% endblocktrans %}</a></li>
               {% comment %} <li><a href="#">About</a></li> {% endcomment %}
-              <li><a href="{% url 'contact_page' %}">Aloqa</a></li>
+              <li><a href="{% url 'contact_page' %}">{% blocktrans %}Aloqa{% endblocktrans %}</a></li>
               <li>
                 {% if user.is_authenticated %}
 
-                      <a href="{% url 'user_profile_page' %}">Profilga kirish</a>
-                      <a href="#" id="logout-link">Chiqish</a>
+                      <a href="{% url 'user_profile_page' %}">{% blocktrans %}Profilga kirish{% endblocktrans %}</a>
+                      <a href="#" id="logout-link">{% blocktrans %}Chiqish{% endblocktrans %}</a>
 
                       {% if user.is_superuser %}
-                        <a href="{% url "admin_page" %}" id="logout-link">Adminlar sahifasi</a>
+                        <a href="{% url "admin_page" %}" id="logout-link">{% blocktrans %}Adminlar sahifasi{% endblocktrans %}</a>
                       {% endif %}
 
                       <form id="logout-form" action="{% url 'logout_page' %}" method="post" style="display: none;">
@@ -62,8 +62,8 @@
                         <button type="submit" style="color: green">Chiqish</button>
                       </form> {% endcomment %}
                     {% else %}
-                      <a href="{% url 'login_page' %}">Saytga kirish</a>
-                      <a href="{% url 'register_page' %}">Ro'yxatdan o'tish</a>
+                      <a href="{% url 'login_page' %}">{% blocktrans %}Saytga kirish{% endblocktrans %}</a>
+                      <a href="{% url 'register_page' %}">{% blocktrans %}Ro'yxatdan o'tish{% endblocktrans %}</a>
 
                 {% endif %}
 
@@ -73,12 +73,13 @@
           <div class="header_top_right d-inline-block">
             <p class="header_top_right">{% now 'F Y H:i' %}</p>
             <form method="get" class="d-inline", action="{% url 'search_result_page' %}">
-              <input type="search" name="q" placeholder="Qidiruv ..." class="form-control d-inline" style="width: auto;">
+              <input type="search" name="q" placeholder="{% blocktrans %}Yangiliklarni izlash ...{% endblocktrans %}" class="form-control d-inline" style="width: auto;">
             </form>
 
-            <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+            <form action="{% url 'set_language' %}" method="post" id="languageForm">
+              {% csrf_token %}
               <input name="next" type="hidden" value="{{ redirect_to }}">
-              <select name="language">
+              <select name="language" onchange="document.getElementById('languageForm').submit();">
                   {% get_current_language as LANGUAGE_CODE %}
                   {% get_available_languages as LANGUAGES %}
                   {% get_language_info_list for LANGUAGES as languages %}
@@ -87,9 +88,8 @@
                           {{ language.name_local }} ({{ language.code }})
                       </option>
                   {% endfor %}
-              </select>
-              <input type="submit" value="Go">
-          </form>
+            </select>
+            </form>
           
           </div>
       
@@ -97,7 +97,7 @@
       </div>
       <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="header_bottom">
-          <div class="logo_area"><a href="{% url 'home_page' %}" class="logo" style="color: green;">Yangiliklar</a></div>
+          <div class="logo_area"><a href="{% url 'home_page' %}" class="logo" style="color: green;">{% blocktrans %}Yangiliklar{% endblocktrans %}</a></div>
           {% comment %} <div class="add_banner"><a href="#"><img src="{% static 'news/images/addbanner_728x90_V1.jpg' %}" alt=""></a></div> {% endcomment %}
         </div>
       </div>
@@ -116,7 +116,7 @@
 <div class="col-lg-4 col-md-4 col-sm-4">
     <aside class="right_content">
       <div class="single_sidebar" style="background-color: rgb(255, 255, 255);">
-        <h2><span>Ko'p ko'riladigan</span></h2>
+        <h2><span>{% blocktrans %}Ko'p ko'riladigan{% endblocktrans %}</span></h2>
         <ul class="spost_nav">
 
           {% for popular_post in popular_posts %}
@@ -140,12 +140,12 @@
       <div class="row">
         <div class="col-lg-4 col-md-4 col-sm-4">
           <div class="footer_widget wow fadeInLeftBig">
-            <h2>Jamoamiz</h2>
+            <h2>{% blocktrans %}Jamoamiz{% endblocktrans %}</h2>
           </div>
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
           <div class="footer_widget wow fadeInDown">
-            <h2>Katigoriyalar</h2>
+            <h2>{% blocktrans %}Kategoriyalar{% endblocktrans %}</h2>
             <ul class="tag_nav">
 
               {% for category in category_list %}
@@ -157,17 +157,17 @@
         </div>
         <div class="col-lg-4 col-md-4 col-sm-4">
           <div class="footer_widget wow fadeInRightBig">
-            <h2>Biz bilan qoling</h2>
-            <p>Aloqa uchun: +998 94-357-66-33</p>
+            <h2>{% blocktrans %}Biz bilan qoling!{% endblocktrans %}</h2>
+            <p>{% blocktrans %}Aloqa uchun: +99894-357-66-33{% endblocktrans %}</p>
             <address>
-              Uzbekistan, Tashkent
+              {% blocktrans %}Uzbekistan Tashkent{% endblocktrans %}
             </address>
           </div>
         </div>
       </div>
     </div>
     <div class="footer_bottom">
-      <center><p style="color: white;">Barcha huquqlar himoyalangan</p><p class="developer" style="color: white;">                           SardorDev 2024</p></center>
+      <center><p style="color: white;">{% blocktrans %}Barcha huquqlar himoyalangan{% endblocktrans %}</p><p class="developer" style="color: white;">                           SardorDev 2024</p></center>
     </div>
   </footer>
 </div>

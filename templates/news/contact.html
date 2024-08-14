@@ -1,8 +1,9 @@
 {% extends "news/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-  Yangiliklar | Aloqa
+{% blocktrans %}Yangiliklar | Aloqa{% endblocktrans %}
 {% endblock title %}
   
 {% block category %}
@@ -27,7 +28,7 @@
   <section id="newsSection">
     <div class="row">
       <div class="col-lg-12 col-md-12">
-        <div class="latest_newsarea"> <span>So'ngi yangiliklar</span>
+        <div class="latest_newsarea"> <span>{% blocktrans %}So'ngi yangiliklar{% endblocktrans %}</span>
           <ul id="ticker01" class="news_sticker">
 
             {% for latest_news in latest_news_list %}
@@ -60,15 +61,15 @@
       <div class="col-lg-8 col-md-8 col-sm-8">
         <div class="left_content">
           <div class="contact_area">
-            <h2>Contact Us</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labolore magna aliqua. Ut enim ad minim veniam. Lorem ipsum dosectetur adipisicing elit, sed do.Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <h2>{% blocktrans %}Murojat uchun:{% endblocktrans %}</h2>
+            <br>
             
             <form action="#" class="contact_form" method='Post'>
               {% csrf_token %}
-              <input class="form-control" type="text" placeholder="Name*" name='name'>
-              <input class="form-control" type="email" placeholder="Email*" name='email'>
-              <textarea class="form-control" cols="30" rows="10" placeholder="Message*" name='message'></textarea>
-              <input type="submit" value="Yuborish">
+              <input class="form-control" type="text" placeholder="{% blocktrans %}Ism-familiyangiz{% endblocktrans %}" name='name'>
+              <input class="form-control" type="email" placeholder="{% blocktrans %}Emailingiz{% endblocktrans %}" name='email'>
+              <textarea class="form-control" cols="30" rows="10" placeholder="{% blocktrans %}Xabar{% endblocktrans %}" name='message'></textarea>
+              <input type="submit" value="{% blocktrans %}Yuborish{% endblocktrans %}">
             </form>
 
           </div>
@@ -78,7 +79,7 @@
 {% block content2 %}
           <div class="single_sidebar">
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">Katigoriya</a></li>
+              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">{% blocktrans %}Katigoriyalar{% endblocktrans %}</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="category">

@@ -1,37 +1,72 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Kirish</title>
-  <link rel="stylesheet" href="{% static 'account/style.css' %}">
-  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>{% blocktrans %}Saytga kirish{% endblocktrans %}</title>
+    <link rel="stylesheet" href="{% static 'account/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="main">  	
-    <input type="checkbox" id="chk" aria-hidden="true">
-    <div class="login">
-      <form method="post" action="{% url 'login_page' %}">
-        {% csrf_token %}
-        <br>
-        <center><h1 style="color: green;">Kirish</h1></center>
-        <br>
-        {{ form.username }}
-        {{ form.password }}
-        <button type="submit">Tastiqlash</button>
-      </form>
-      <center><a href="{% url 'password-reset' %}" style="color: rgb(255, 0, 0);">Parolni tiklash</a></center>
-      <center><h2><a href="{% url 'register_page' %}" style="color: rgb(0, 0, 255);">Ro'yxatdan o'tish</a><h2></center>
+    <div class="main">
+      
+        <div class="language-selector">
+          <center>
+            <form action="{% url 'set_language' %}" method="post" id="languageForm">
+              {% csrf_token %}
+              <input name="next" type="hidden" value="{{ redirect_to }}">
+              <select name="language" onchange="document.getElementById('languageForm').submit();">
+                  {% get_current_language as LANGUAGE_CODE %}
+                  {% get_available_languages as LANGUAGES %}
+                  {% get_language_info_list for LANGUAGES as languages %}
+                  {% for language in languages %}
+                      <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                          {{ language.name_local }} ({{ language.code }})
+                      </option>
+                  {% endfor %}
+            </select>
+            </form>
+          </center>
+        
+        </div>
+
+        <input type="checkbox" id="chk" aria-hidden="true">
+        <div class="login">
+          <br>
+          <br>
+            <form method="post" action="{% url 'login_page' %}">
+                {% csrf_token %}
+                <center>
+                    <h1 style="color: #06943f;">{% blocktrans %}Kirish{% endblocktrans %}</h1>
+                </center>
+                {{ form.username }}
+                {{ form.password }}
+                <button type="submit">{% blocktrans %}Kirish{% endblocktrans %}</button>
+            </form>
+
+            <center>
+                <a href="{% url 'password-reset' %}" style="color: #ff0000;">
+                    {% blocktrans %}Parolni tiklash{% endblocktrans %}
+                </a>
+            </center>
+
+            <center>
+                <h2>
+                    <a href="{% url 'register_page' %}" style="color: #0000ff;">
+                        {% blocktrans %}Ro'yxatdan o'tish{% endblocktrans %}
+                    </a>
+                </h2>
+            </center>
+        </div>
     </div>
-  </div>
 
-  <script>
+    <script>
+        const username = document.querySelector('#id_username');
+        const password = document.querySelector('#id_password');
 
-    const username = document.querySelector('#id_username');
-    const password = document.querySelector('#id_password');
-
-    username.placeholder = "Foydalanuvchi nomi"; 
-    password.placeholder = "Parol"
-   </script>
+        username.placeholder = "{% blocktrans %}Foydalanuvchi nomi{% endblocktrans %}";
+        password.placeholder = "{% blocktrans %}Parol{% endblocktrans %}";
+    </script>
 </body>
 </html>

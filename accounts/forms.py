@@ -5,21 +5,21 @@ from .models import ProfileModel
 
 class LoginForm(forms.Form):
     
-    username = forms.CharField(max_length=50, widget=forms.TextInput(attrs={'placeholder': 'Foydalanuvchi nomi'}))
-    password = forms.CharField(max_length=50, widget=forms.PasswordInput(attrs={'placeholder': 'Parol'}))
+    username = forms.CharField(max_length=50)
+    password = forms.CharField(max_length=50)
     
 
 class UserRegistrationForm(forms.ModelForm):
-    password = forms.CharField(label='Parol', widget=forms.PasswordInput(attrs={'placeholder': 'Parol'}))
-    password_2 = forms.CharField(label='Parolni takrorlang', widget=forms.PasswordInput(attrs={'placeholder': 'Parolni takrorlang'}))
+    password = forms.CharField()
+    password_2 = forms.CharField()
     
     class Meta:
         model = User
         fields = ['username', 'first_name', 'email']
         widgets = {
-            'username': forms.TextInput(attrs={'placeholder': 'Foydalanuvchi nomi'}),
-            'first_name': forms.TextInput(attrs={'placeholder': 'Ism'}),
-            'email': forms.EmailInput(attrs={'placeholder': 'Email'}),
+            'username': forms.TextInput(),
+            'first_name': forms.TextInput(),
+            'email': forms.EmailInput(),
         }
         
     def clean_password_2(self):
