@@ -1,4 +1,5 @@
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -8,12 +9,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m!d+e^*6k^np5eoyam&y^lb1w#5+02%p*&oqyfpg+lxhc=@p*='
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['sardorramazonov.uz', '127.0.0.1']
 
 
 # Application definition
@@ -23,6 +24,7 @@ INSTALLED_APPS = [
     'jazzmin',
     'hitcount',
     'modeltranslation',
+    'whitenoise.runserver_nostatic',
     
     # default apps
     'django.contrib.admin',
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     'django.contrib.sessions.middleware.SessionMiddleware',
     "django.middleware.locale.LocaleMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -127,13 +130,17 @@ LOCALE_PATHS = BASE_DIR, 'locale'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+STATIC_URL = '/static/'
+STATIC_ROOT = '/home/django/sardorramazonov.uz/django/staticfiles'
+STATICFILES_DIRS = '/home/django/sardorramazonov.uz/django/static'
+# STATIC_ROOT = BASE_DIR / 'staticfiles'
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static'
+# ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = '/home/django/sardorramazonov.uz/django/media'
+# MEDIA_ROOT = BASE_DIR / 'media'
 
 
 # Default primary key field type
@@ -145,6 +152,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home_page'
 
 LOGIN_URL = 'login_page'
+
+STATICFILES_STORAGE = 'whitenoise.storage.compressedmanifeststaticfilesstorage'
 
 
 EMAIL_HOST = 'smtp.gmail.com'
