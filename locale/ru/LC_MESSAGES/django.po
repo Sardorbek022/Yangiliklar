@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-08-14 11:17+0500\n"
+"POT-Creation-Date: 2024-08-18 12:59+0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: core/settings.py:117
 msgid "Uzbek"
-msgstr ""
+msgstr "O'zbekcha"
 
 #: core/settings.py:118
 msgid "English"
@@ -31,6 +31,39 @@ msgstr ""
 #: core/settings.py:119
 msgid "Russian"
 msgstr ""
+
+#: templates/404.html:6
+#, fuzzy
+#| msgid "Yangiliklar"
+msgid "Yangiliklar | 404"
+msgstr "Новости"
+
+#: templates/404.html:31 templates/account/register_done.html:30
+#: templates/crud/news_create.html:31 templates/crud/news_delete.html:31
+#: templates/crud/news_edit.html:30 templates/news/contact.html:31
+#: templates/news/home.html:31 templates/news/home.html:77
+#: templates/news/news_detail.html:31 templates/news/search_result.html:31
+#: templates/pages/admins.html:31 templates/pages/user_edit.html:31
+#: templates/pages/user_profile.html:31
+#: templates/registration/logged_out.html:31
+msgid "So'ngi yangiliklar"
+msgstr "Последние новости"
+
+#: templates/404.html:63
+msgid "Kechirasiz sahifa topilmadi!"
+msgstr "Извините, страница не найдена!"
+
+#: templates/404.html:72 templates/account/register_done.html:70
+#: templates/news/category_detail.html:72 templates/news/contact.html:82
+#: templates/news/search_result.html:72 templates/pages/user_edit.html:72
+#: templates/pages/user_profile.html:98
+#: templates/registration/logged_out.html:68
+#: templates/registration/password_reset_complete.html:16
+#: templates/registration/password_reset_confirm.html:33
+#: templates/registration/password_reset_done.html:14
+#: templates/registration/password_reset_form.html:30
+msgid "Katigoriyalar"
+msgstr "Категории"
 
 #: templates/account/register.html:7 templates/account/register.html:34
 #: templates/news/base.html:68 templates/registration/login.html:57
@@ -43,6 +76,7 @@ msgstr "Продажа"
 
 #: templates/account/register.html:45 templates/news/base.html:67
 #: templates/registration/login.html:7
+#: templates/registration/password_reset_complete.html:8
 msgid "Saytga kirish"
 msgstr "Вход на сайт"
 
@@ -66,33 +100,60 @@ msgstr "Пароль"
 msgid "Parolni takrorlang"
 msgstr "Повторите пароль"
 
-#: templates/account/register_done.html:4
+#: templates/account/register_done.html:5
 msgid "Ro'yxatdan o'tdingiz"
 msgstr "Вы зарегистрировались"
 
-#: templates/account/register_done.html:29 templates/news/contact.html:31
-#: templates/news/home.html:31 templates/news/home.html:77
-#: templates/news/news_detail.html:31 templates/news/search_result.html:31
-msgid "So'ngi yangiliklar"
-msgstr "Последние новости"
-
-#: templates/account/register_done.html:61
+#: templates/account/register_done.html:62
 msgid "tabriklayman muvofaqiyatli ro'yxatdan o'tdingiz"
 msgstr "Поздравляем, вы успешно зарегистрировались"
 
-#: templates/account/register_done.html:63
+#: templates/account/register_done.html:64
 msgid "Endi saytga "
 msgstr "Теперь на сайт "
 
-#: templates/account/register_done.html:63
+#: templates/account/register_done.html:64
 msgid "Kirishingiz mumkin"
 msgstr "Вы можете войти"
 
-#: templates/account/register_done.html:69
-#: templates/news/category_detail.html:72 templates/news/contact.html:82
-#: templates/news/search_result.html:72
-msgid "Katigoriyalar"
+#: templates/crud/news_create.html:6
+msgid "Yangiliklar | Yangilik yaratish"
+msgstr "Новости | Создать новость"
+
+#: templates/crud/news_create.html:59 templates/news/news_detail.html:85
+msgid "Yangilik yaratish"
+msgstr "Создать новость"
+
+#: templates/crud/news_create.html:71
+msgid "Yaratish"
+msgstr "Создание"
+
+#: templates/crud/news_create.html:95 templates/crud/news_delete.html:72
+#: templates/news/base.html:151 templates/news/home.html:280
+#: templates/news/news_detail.html:125 templates/pages/admins.html:74
+msgid "Kategoriyalar"
 msgstr "Категории"
+
+#: templates/crud/news_delete.html:6 templates/crud/news_delete.html:58
+#: templates/news/news_detail.html:85
+msgid "Yangilikni o'chirish"
+msgstr "Выключить новости"
+
+#: templates/crud/news_delete.html:64
+msgid "O'chirish"
+msgstr "Выключать"
+
+#: templates/crud/news_edit.html:6
+msgid "Yangiliklar | Yangilikni tahrirlash"
+msgstr "Новости | Редактирование новостей"
+
+#: templates/crud/news_edit.html:58
+msgid "Yangilikni tahrirlash"
+msgstr "Редактирование новостей"
+
+#: templates/crud/news_edit.html:70
+msgid "Tahrirlash"
+msgstr "Редактирование"
 
 #: templates/news/base.html:36
 msgid "Bosh sahifa"
@@ -129,11 +190,6 @@ msgstr "Самые просматриваемые"
 #: templates/news/base.html:146
 msgid "Jamoamiz"
 msgstr "Наша команда"
-
-#: templates/news/base.html:151 templates/news/home.html:280
-#: templates/news/news_detail.html:125
-msgid "Kategoriyalar"
-msgstr "Категории"
 
 #: templates/news/base.html:163
 msgid "Biz bilan qoling!"
@@ -219,14 +275,6 @@ msgstr "Просмотры: "
 msgid "Yangiliklarni tahrirlash"
 msgstr "Редактирование новостей"
 
-#: templates/news/news_detail.html:85
-msgid "Yangilikni o'chirish"
-msgstr "Выключить новости"
-
-#: templates/news/news_detail.html:85
-msgid "Yangilik yaratish"
-msgstr "Создать новость"
-
 #: templates/news/news_detail.html:89
 msgid "Izohlar soni"
 msgstr "Количество комментариев: "
@@ -239,13 +287,149 @@ msgstr "Оставить комментарий"
 msgid "Yangiliklar | Qidiruv natijalari"
 msgstr "Новости | Результаты поиска"
 
+#: templates/pages/admins.html:6
+msgid "Yangiliklar | Adminlar"
+msgstr "Новости | Aдминистратора"
+
+#: templates/pages/admins.html:59
+msgid "Adminlar:"
+msgstr "Aдминистратора"
+
+#: templates/pages/admins.html:62
+msgid "Foydalanuvchi nomi: "
+msgstr "Имя пользователя"
+
+#: templates/pages/admins.html:63
+msgid "Ismi: "
+msgstr "Имя: "
+
+#: templates/pages/admins.html:64
+msgid "Familiyasi: "
+msgstr "Фамилия: "
+
+#: templates/pages/user_edit.html:6
+msgid "Yangiliklar | Foydalanuvchi profilini tahrirlash"
+msgstr "Новости | Редактировать профиль пользователя"
+
+#: templates/pages/user_edit.html:63
+msgid "Tastiqlash"
+msgstr "Продажа"
+
+#: templates/pages/user_profile.html:6
+msgid "Yangiliklar | Foydalanuvchi profili"
+msgstr "Новости | Профиль пользователя"
+
+#: templates/pages/user_profile.html:62
+msgid "Xush kelibsiz: "
+msgstr "Добро пожаловать: "
+
+#: templates/pages/user_profile.html:63
+msgid "Sizning Username: "
+msgstr "Ваше имя пользователя: "
+
+#: templates/pages/user_profile.html:64
+msgid "Sizning email: "
+msgstr "Ваш адрес электронной почты:"
+
+#: templates/pages/user_profile.html:66
+msgid "Sizning manzil: "
+msgstr "Ваш адрес: "
+
+#: templates/pages/user_profile.html:69
+msgid "Sizning tug'ilgan kuningiz: "
+msgstr "Ваш день рождения: "
+
+#: templates/pages/user_profile.html:71
+msgid "Profile Photo"
+msgstr "Фото профиля"
+
+#: templates/pages/user_profile.html:75
+msgid "Akkauntdan chiqish"
+msgstr "Выйти из аккаунта"
+
+#: templates/pages/user_profile.html:83
+#: templates/registration/password-change.html:10
+msgid "Parolni o'zgartirish"
+msgstr "изменить пароль"
+
+#: templates/pages/user_profile.html:85 templates/registration/login.html:50
+#: templates/registration/password_reset_confirm.html:23
+#: templates/registration/password_reset_form.html:8
+msgid "Parolni tiklash"
+msgstr "Сброс пароля"
+
+#: templates/pages/user_profile.html:87
+msgid "Profilni tahrirlash"
+msgstr "Редактировать профиль"
+
+#: templates/registration/logged_out.html:6
+msgid "Yangiliklar | Saytdan chiqdingiz"
+msgstr "Новости | Вы покинули сайт"
+
+#: templates/registration/logged_out.html:59
+msgid "Siz saytdan chiqdingiz"
+msgstr "Вы покинули сайт"
+
+#: templates/registration/logged_out.html:61
+msgid "Saytga qaytib kirish uchun "
+msgstr "Чтобы вернуться на сайт"
+
+#: templates/registration/logged_out.html:61
 #: templates/registration/login.html:41 templates/registration/login.html:45
 msgid "Kirish"
 msgstr "Входь"
 
-#: templates/registration/login.html:50
-msgid "Parolni tiklash"
-msgstr "Сброс пароля"
+#: templates/registration/logged_out.html:61
+msgid " tugmasini bosing"
+msgstr " нажмите кнопку"
+
+#: templates/registration/password-change-done.html:6
+msgid "Yangiliklar | Parol o'zgartirildi"
+msgstr "Новости | Пароль изменен"
+
+#: templates/registration/password-change-done.html:10
+msgid "Foydalanuvchi paroli o'zgardi"
+msgstr "Пароль пользователя изменен"
+
+#: templates/registration/password-change-done.html:11
+msgid "Sizning parolingiz o'zgardi"
+msgstr "Ваш пароль изменился"
+
+#: templates/registration/password-change.html:6
+msgid "Yangiliklar | Parolni o'zgartirish"
+msgstr "Новости | изменить пароль"
+
+#: templates/registration/password-change.html:11
+msgid "Parolni o'zgartirish uchun formani to'ldirish"
+msgstr "Заполните форму для смены пароля"
+
+#: templates/registration/password-change.html:15
+msgid "Parolni almashtirish"
+msgstr "Изменить пароль"
+
+#: templates/registration/password_reset_complete.html:8
+msgid "Parol muvofaqiyatli tiklandi saytga kirish uchun "
+msgstr "Пароль успешно сброшен для доступа к сайту "
+
+#: templates/registration/password_reset_complete.html:8
+msgid "tugmasini bosing"
+msgstr "нажмите кнопку"
+
+#: templates/registration/password_reset_confirm.html:9
+msgid "Parolni tiklashni tasdiqlang"
+msgstr "Подтвердить сброс пароля"
+
+#: templates/registration/password_reset_done.html:7
+msgid ""
+"Parolni tiklash uchun kirish qutingizni tekshiring va parolni tiklash "
+"bo'yicha ko'rsatmalarga amal qiling."
+msgstr ""
+"Чтобы сбросить пароль, проверьте свой почтовый ящик и следуйте инструкциям "
+"по сбросу пароля."
+
+#: templates/registration/password_reset_form.html:20
+msgid "Jo'natish"
+msgstr "Перевозки"
 
 #: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:16
 msgid "Messages"

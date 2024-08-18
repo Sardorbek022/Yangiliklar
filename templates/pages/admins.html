@@ -1,8 +1,9 @@
 {% extends "news/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-  Yangiliklar | Adminlar
+{% blocktrans %}Yangiliklar | Adminlar{% endblocktrans %}
 {% endblock title %} 
 
 {% block category %}
@@ -27,7 +28,7 @@
   <section id="newsSection">
     <div class="row">
       <div class="col-lg-12 col-md-12">
-        <div class="latest_newsarea"> <span>So'ngi yangiliklar</span>
+        <div class="latest_newsarea"> <span>{% blocktrans %}So'ngi yangiliklar{% endblocktrans %}</span>
           <ul id="ticker01" class="news_sticker">
 
             {% for latest_news in latest_news_list %}
@@ -55,12 +56,12 @@
 
 {% block content %} 
 <div class="col-lg-8 col-md-8 col-sm-8"> 
-  <center style="color: red;"><h1>Adminlar ro'yxati</h1></center>
+  <center style="color: red;"><h1>{% blocktrans %}Adminlar:{% endblocktrans %}</h1></center>
     {% for user in admin_users %}
     <li>
-      <h4 style="color: green;">Username: {{user.username}}</h4>
-      <h4 style="color: green;">First name: {{user.first_name}}</h4>
-      <h4 style="color: green;">Last name: {{user.last_name}}</h4>
+      <h4 style="color: green;">{% blocktrans %}Foydalanuvchi nomi: {% endblocktrans %} {{user.username}}</h4>
+      <h4 style="color: green;">{% blocktrans %}Ismi: {% endblocktrans %} {{user.first_name}}</h4>
+      <h4 style="color: green;">{% blocktrans %}Familiyasi: {% endblocktrans %}{{user.last_name}}</h4>
     </li>
     {% endfor %}
 </div>
@@ -70,7 +71,7 @@
 {% block content2 %}
           <div class="single_sidebar">
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">Katigoriya</a></li>
+              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">{% blocktrans %}Kategoriyalar{% endblocktrans %}</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="category">

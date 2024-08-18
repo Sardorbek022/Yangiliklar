@@ -1,8 +1,9 @@
 {% extends "news/base.html" %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}
-  Yangiliklar | Saytdan chiqdingiz
+  {% blocktrans %}Yangiliklar | Saytdan chiqdingiz{% endblocktrans %}
 {% endblock title %} 
 
 {% block category %}  
@@ -27,7 +28,7 @@
   <section id="newsSection">
     <div class="row">
       <div class="col-lg-12 col-md-12">
-        <div class="latest_newsarea"> <span>So'ngi yangiliklar</span>
+        <div class="latest_newsarea"> <span>{% blocktrans %}So'ngi yangiliklar{% endblocktrans %}</span>
           <ul id="ticker01" class="news_sticker">
 
             {% for latest_news in latest_news_list %}
@@ -55,16 +56,16 @@
 
 {% block content %}  
 <div class="col-lg-8 col-md-8 col-sm-8">
-    <h1 style="color: green;">Siz saytdan chiqdingiz</h1>
+    <h1 style="color: green;">{% blocktrans %}Siz saytdan chiqdingiz{% endblocktrans %}</h1>
     <br>
-    <p>Saytga qaytib kirish uchun <a href="{% url 'login_page' %}" style="color: green;">Kirish</a> tugmasini bosing</p>
+    <p>{% blocktrans %}Saytga qaytib kirish uchun {% endblocktrans %} <a href="{% url 'login_page' %}" style="color: green;">{% blocktrans %}Kirish{% endblocktrans %}</a> {% blocktrans %} tugmasini bosing{% endblocktrans %}</p>
 </div>
 {% endblock content %} 
 
 {% block content2 %}
           <div class="single_sidebar">
             <ul class="nav nav-tabs" role="tablist">
-              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">Katigoriya</a></li>
+              <li role="presentation" class="active"><a href="#category" aria-controls="home" role="tab" data-toggle="tab">{% blocktrans %}Katigoriyalar{% endblocktrans %}</a></li>
             </ul>
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="category">
