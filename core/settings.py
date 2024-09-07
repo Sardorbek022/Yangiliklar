@@ -131,15 +131,15 @@ LOCALE_PATHS = BASE_DIR, 'locale'
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/django/sardorramazonov.uz/django/staticfiles'
-STATICFILES_DIRS = '/home/django/sardorramazonov.uz/django/static'
+STATIC_ROOT = '/home/sardorr2/news/django/staticfiles'
+STATICFILES_DIRS = '/home/sardorr2/news/django/static'
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
 # STATICFILES_DIRS = [
 #     BASE_DIR / 'static'
 # ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/django/sardorramazonov.uz/django/media'
+MEDIA_ROOT = '/home/sardorr2/news/django/media'
 # MEDIA_ROOT = BASE_DIR / 'media'
 
 
