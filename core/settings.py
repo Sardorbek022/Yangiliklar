@@ -14,7 +14,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['sardorramazonov.uz', '127.0.0.1']
+ALLOWED_HOSTS = ['sardordev022.uz', '127.0.0.1']
 
 
 # Application definition
@@ -131,15 +131,15 @@ LOCALE_PATHS = BASE_DIR, 'locale'
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/home/sardorr2/news/django/staticfiles'
-STATICFILES_DIRS = '/home/sardorr2/news/django/static'
+STATIC_ROOT = '/home/sardord1/sardordev022.uz/django/staticfiles'
+STATICFILES_DIRS = '/home/sardord1/sardordev022.uz/django/static'
 # STATIC_ROOT = BASE_DIR / 'staticfiles'
 # STATICFILES_DIRS = [
-#     BASE_DIR / 'static'
+#     BASE_DIR / 'static',
 # ]
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/sardorr2/news/django/media'
+MEDIA_ROOT = '/home/sardord1/sardordev022.uz/django/media'
 # MEDIA_ROOT = BASE_DIR / 'media'
 
 
